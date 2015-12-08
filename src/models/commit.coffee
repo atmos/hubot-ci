@@ -10,7 +10,7 @@ class Commit
     @api   = Octonode.client(@config.token, {hostname: @config.hostname})
 
   status: (callback) ->
-    @api.get "/repos/#{@repo}/statuses/#{@sha}", (err, status, data, headers) ->
+    @api.get "/repos/#{@repo}/commits/#{@sha}/statuses", (err, status, data, headers) ->
       callback(err, data)
 
 module.exports.Commit = Commit
