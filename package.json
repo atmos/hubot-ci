@@ -1,6 +1,6 @@
 {
   "name": "hubot-ci",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Use Hubot to interact with GitHub commit statuses",
   "main": "index.coffee",
   "scripts": {

@@ -45,10 +45,4 @@ describe "The hubot-ci Script", () ->
 
     adapter.receive(new TextMessage(user, "hubot ci:version"))
 
-  it "tells you if master is green", (done) ->
-    adapter.on "send", (envelope, strings) ->
-      expected = "Building atmos/hubot-deploy/master"
-      assert.equal strings[0], expected
-      done()
-
-    adapter.receive(new TextMessage(user, "hubot ci status hubot-deploy"))
+  it "tells you if master is green"

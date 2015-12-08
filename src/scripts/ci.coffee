@@ -37,8 +37,6 @@ module.exports = (robot) ->
     commit.status (err, data) ->
       robot.emit "hubot_ci_commit_status", err, msg, deployment, data
 
-    msg.send "Building #{deployment.repository}/#{ref}"
-
   ###########################################################################
   # ci:version
   #
