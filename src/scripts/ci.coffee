@@ -13,8 +13,10 @@ Commit        = require(Path.join(__dirname, "..", "models", "commit")).Commit
 Version       = require(Path.join(__dirname, "..", "version")).Version
 Deployment    = require("hubot-deploy/src/models/deployment").Deployment
 
-Verifiers     = require "hubot-deploy/src/models/verifiers"
-TokenForBrain = Verifiers.VaultKey
+Verifiers        = require "hubot-deploy/src/models/verifiers"
+TokenForBrain    = Verifiers.VaultKey
+ApiTokenVerifier = Verifiers.ApiTokenVerifier
+
 
 ###########################################################################
 module.exports = (robot) ->
@@ -36,6 +38,20 @@ module.exports = (robot) ->
     commit = new Commit(deployment.userToken, deployment.repository, ref)
     commit.status (err, data) ->
       robot.emit "hubot_ci_commit_status", err, msg, deployment, data
+
+  ###########################################################################
+  # ci:verify
+  #
+  # Useful for debugging
+  robot.respond /ci\:verify$/i, (msg) ->
+    user = robot.brain.userForId msg.envelope.user.id
+    token = robot.vault.forUser(user).get(TokenForBrain)
+    verifier = new ApiTokenVerifier(token)
+    verifier.valid (result) ->
+      if result
+        msg.send "Your GitHub token is valid on #{verifier.config.hostname}."
+      else
+        msg.send "Your GitHub token is invalid, verify that it has 'repo' scope."
 
   ###########################################################################
   # ci:version
