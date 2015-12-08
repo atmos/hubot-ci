@@ -1,8 +1,8 @@
 module.exports.cassettes =
-  '/repos-atmos-hubot-deploy-status-mysha-success':
-    host: 'https://api.github.com:443'
-    path: '/repos/atmos/hubot-deploy/commits/mysha/statuses'
-    method: 'get'
+  "/repos-atmos-hubot-deploy-status-mysha-success":
+    host: "https://api.github.com:443"
+    path: "/repos/atmos/hubot-deploy/commits/mysha/statuses"
+    method: "get"
     code: 200
     body: [
       {
@@ -19,10 +19,10 @@ module.exports.cassettes =
       }
     ]
 
-  '/repos-atmos-hubot-deploy-status-mysha-failure':
-    host: 'https://api.github.com:443'
-    path: '/repos/atmos/hubot-deploy/commits/mysha/statuses'
-    method: 'get'
+  "/repos-atmos-hubot-deploy-status-mysha-failure":
+    host: "https://api.github.com:443"
+    path: "/repos/atmos/hubot-deploy/commits/mysha/statuses"
+    method: "get"
     code: 200
     body: [
       {
@@ -39,10 +39,10 @@ module.exports.cassettes =
       }
     ]
 
-  '/repos-atmos-hubot-deploy-status-mysha-pending':
-    host: 'https://api.github.com:443'
-    path: '/repos/atmos/hubot-deploy/commits/mysha/statuses'
-    method: 'get'
+  "/repos-atmos-hubot-deploy-status-mysha-pending":
+    host: "https://api.github.com:443"
+    path: "/repos/atmos/hubot-deploy/commits/mysha/statuses"
+    method: "get"
     code: 200
     body: [
       {
