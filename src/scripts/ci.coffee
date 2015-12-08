@@ -1,9 +1,9 @@
 # Description
-#   Cut GitHub deployments from chat that deploy via hooks - https://github.com/atmos/hubot-deploy
+#   See the status of CI from chat https://github.com/atmos/hubot-ci
 #
 # Commands:
-#   hubot ci status hubot-ci - see what environments you can deploy app
-#   hubot ci status hubot-ci/mybranch - see what environments you can deploy app
+#   hubot ci status myapp - see the status of the default branch for app
+#   hubot ci status myapp/mybranch - see the status of a branch of app
 #   hubot ci:version - show the script version and node/environment info
 #
 supported_tasks = [ "ci status" ]
