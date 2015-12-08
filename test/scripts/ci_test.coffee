@@ -5,7 +5,7 @@ TextMessage   = require("hubot/src/message").TextMessage
 Verifiers = require "hubot-deploy/src/models/verifiers"
 TokenForBrain    = Verifiers.VaultKey
 
-pkg = require Path.join __dirname, "..", 'package.json'
+pkg = require Path.join __dirname, "..", "..", "package.json"
 pkgVersion = pkg.version
 
 describe "The hubot-ci Script", () ->
@@ -19,7 +19,7 @@ describe "The hubot-ci Script", () ->
     robot.adapter.on "connected", () ->
       require("hubot-deploy")(robot)
       require("hubot-vault")(robot)
-      require("../index")(robot)
+      require("../../index")(robot)
 
       userInfo =
         name: "atmos",

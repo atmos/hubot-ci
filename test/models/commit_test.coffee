@@ -1,6 +1,6 @@
 VCR    = require "ys-vcr"
 Path   = require("path")
-Commit = require("../src/models/commit").Commit
+Commit = require("../../src/models/commit").Commit
 
 describe "A GitHub commit", () ->
   beforeEach (done) ->
