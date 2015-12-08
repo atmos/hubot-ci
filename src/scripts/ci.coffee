@@ -9,6 +9,7 @@
 supported_tasks = [ "ci status" ]
 
 Path          = require("path")
+Commit        = require(Path.join(__dirname, "..", "models", "commit")).Commit
 Version       = require(Path.join(__dirname, "..", "version")).Version
 Deployment    = require("hubot-deploy/src/models/deployment").Deployment
 
@@ -31,6 +32,10 @@ module.exports = (robot) ->
     token = robot.vault.forUser(user).get(TokenForBrain)
     if token?
       deployment.setUserToken(token)
+
+    commit = new Commit(deployment.userToken, deployment.repository, ref)
+    commit.status (err, data) ->
+      robot.emit "hubot_ci_commit_status", err, deployment, data
 
     msg.send "Building #{deployment.repository}/#{ref}"
 
