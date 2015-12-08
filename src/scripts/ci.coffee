@@ -10,6 +10,7 @@ supported_tasks = [ "ci status" ]
 
 Path          = require("path")
 Version       = require(Path.join(__dirname, "..", "version")).Version
+Deployment    = require("hubot-deploy/src/models/deployment").Deployment
 
 ###########################################################################
 module.exports = (robot) ->
@@ -17,8 +18,13 @@ module.exports = (robot) ->
   # ci status <app>/<branch|sha|tag>
   #
   # Displays the required statuses of the application
-  robot.respond ///ci status( (\*\/[-_\+\.a-zA-z0-9\/]+))?$///i, (msg) ->
-    robot.logger.info "Requesting status"
+  robot.respond /ci status ([-_\.0-9a-z]+)(?:\/([^\s]+))?/i, (msg) ->
+    name  = msg.match[1]
+    ref   = (msg.match[2]||'master')
+
+    deployment = new Deployment(name, ref)
+
+    msg.send "Building #{deployment.repository}/#{ref}"
 
   ###########################################################################
   # ci:version

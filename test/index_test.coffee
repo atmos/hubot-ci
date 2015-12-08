@@ -31,10 +31,18 @@ describe "The hubot-ci Script", () ->
     robot.server.close()
     robot.shutdown()
 
-  it "tells you when your provided GitHub token is invalid", (done) ->
+  it "tells you the version of hubot-ci", (done) ->
     adapter.on "send", (envelope, strings) ->
       expected = "hubot-ci v#{pkgVersion}/hubot v#{robot.version}/node #{process.version}"
       assert.equal strings[0], expected
       done()
 
     adapter.receive(new TextMessage(user, "hubot ci:version"))
+
+  it "tells you if master is green", (done) ->
+    adapter.on "send", (envelope, strings) ->
+      expected = "Building atmos/hubot-deploy/master"
+      assert.equal strings[0], expected
+      done()
+
+    adapter.receive(new TextMessage(user, "hubot ci status hubot-deploy"))
