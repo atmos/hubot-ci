@@ -2,6 +2,9 @@ Path          = require("path")
 Robot         = require "hubot/src/robot"
 TextMessage   = require("hubot/src/message").TextMessage
 
+Verifiers = require "hubot-deploy/src/models/verifiers"
+TokenForBrain    = Verifiers.VaultKey
+
 pkg = require Path.join __dirname, "..", 'package.json'
 pkgVersion = pkg.version
 
@@ -14,6 +17,8 @@ describe "The hubot-ci Script", () ->
     robot = new Robot(null, "mock-adapter", true, "Hubot")
 
     robot.adapter.on "connected", () ->
+      require("hubot-deploy")(robot)
+      require("hubot-vault")(robot)
       require("../index")(robot)
 
       userInfo =
@@ -23,6 +28,7 @@ describe "The hubot-ci Script", () ->
       user    = robot.brain.userForId "1", userInfo
       adapter = robot.adapter
 
+      robot.vault.forUser(user).set(TokenForBrain, "my-github-token")
       done()
 
     robot.run()

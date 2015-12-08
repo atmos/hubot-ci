@@ -12,6 +12,9 @@ Path          = require("path")
 Version       = require(Path.join(__dirname, "..", "version")).Version
 Deployment    = require("hubot-deploy/src/models/deployment").Deployment
 
+Verifiers     = require "hubot-deploy/src/models/verifiers"
+TokenForBrain = Verifiers.VaultKey
+
 ###########################################################################
 module.exports = (robot) ->
   ###########################################################################
@@ -23,6 +26,11 @@ module.exports = (robot) ->
     ref   = (msg.match[2]||'master')
 
     deployment = new Deployment(name, ref)
+
+    user = robot.brain.userForId msg.envelope.user.id
+    token = robot.vault.forUser(user).get(TokenForBrain)
+    if token?
+      deployment.setUserToken(token)
 
     msg.send "Building #{deployment.repository}/#{ref}"
 
