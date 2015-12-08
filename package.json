@@ -17,7 +17,7 @@
   "author": "atmos",
   "dependencies": {
     "hubot": ">=2.7.2 <=2.13.2",
-    "hubot-vault": "0.0.1",
+    "hubot-deploy": "^0.10.7",
     "scoped-http-client": "0.11.0"
   },
   "devDependencies": {
