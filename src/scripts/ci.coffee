@@ -11,7 +11,7 @@ supported_tasks = [ "ci status" ]
 Path          = require("path")
 Commit        = require(Path.join(__dirname, "..", "models", "commit")).Commit
 Version       = require(Path.join(__dirname, "..", "version")).Version
-Deployment    = require("hubot-deploy/src/models/deployment").Deployment
+Deployment    = require("hubot-deploy/src/github/api").Deployment
 
 Verifiers        = require "hubot-deploy/src/models/verifiers"
 TokenForBrain    = Verifiers.VaultKey
